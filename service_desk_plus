@@ -1,0 +1,14 @@
+curl -G https://itservicedesk.temenos.com/api/v3/workstations \
+        -H "AuthToken: n3v3r-g0nn4-g1v3-u-up" \
+        -H "Content-Type: application/x-www-form-urlencoded" \
+        --data-urlencode input_data='{
+  "list_info": {
+    "row_count": "1000",
+    "start_index": 1,
+    "search_criteria": {
+      "condition": "contains",
+      "field": "name",
+      "value": "abcdefg"
+    },
+  }
+}'
