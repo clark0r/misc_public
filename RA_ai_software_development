@@ -1,0 +1,47 @@
+High level risk assessment for using AI in software devleopment activities.
+
+Category: Insecure Code Generation
+Risk: AI may produce code with injection flaws, poor input validation, weak cryptography, or improper access controls.
+Impact: Code is vulnerable to attacks like SQL injection, XSS, and privilege escalation.
+Mitigation: Review generated code manually and with security linters; follow secure coding standards. Ensure developers are trained and have access to security tools that detect insecure code patterns early.
+
+Category: Use of non-existent dependencies
+Risk: Generated code may inject dependencies that do not exist or are being typo-squatted by threat actors (‘slop squatting’ AI hallucinations lead to a new cyber threat: Slopsquatting | CSO Online).
+Impact: Inclusion of insecure, malicious dependencies controlled by threat actors. Backdoors to applications, may appear safe today but may not be tomorrow.
+Mitigation: Use software composition analysis tools to detect malicious dependencies.
+Implement procedures and governance to control use of third-party components, including open source libraries and functions. Prevent commits of unknown or unofficial libraries through automated pre-commit validation.
+
+Category: Use of Vulnerable Libraries
+Risk: Generated code may depend on outdated or insecure third-party packages.
+Impact: Exposure to known vulnerabilities and supply chain attacks.
+Mitigation: Use software composition analysis tools to monitor dependency health and patch known CVEs. Integrate pre-commit hooks to enforce use of approved libraries and prevent inclusion of vulnerable components.
+
+Category: Training Data Leakage
+Risk: AI might reproduce proprietary or insecure code from its training data.
+Impact: Intellectual property leaks or propagation of insecure patterns.
+Mitigation: Use models trained with curated, secure datasets; scan outputs for IP or secrets leakage. Accountability remains with the developer; all commits must be made by named individuals only.
+
+Category: Over-reliance on AI
+Risk: Developers may copy/paste AI-generated code without understanding or testing it.
+Impact: Security vulnerabilities go undetected due to lack of scrutiny.
+Mitigation: Enforce code reviews and educate developers on AI limitations. Promote accountability by requiring all commits to be traceable to individuals.
+
+Category: Prompt Injection
+Risk: If AI uses dynamic prompts, attackers could manipulate input to inject malicious behavior.
+Impact: Malicious code execution or logic tampering.
+Mitigation: Sanitize and validate all user inputs used in AI-driven systems. Use secure-by-design prompts and test AI-assisted workflows with known attack scenarios.
+
+Category: Lack of Context
+Risk: AI may miss business-specific logic or security/compliance requirements.
+Impact: Generated code may violate security policies or regulations.
+Mitigation: Enforce code reviews and security architecture validation. Include pre-commit validation to enforce Temenos coding standards and check for required work items in commit messages.
+
+Category: Insecure Defaults
+Risk: Generated code may include hardcoded credentials, open access, or poor logging.
+Impact: Easy for attackers to exploit default settings.
+Mitigation: Review generated code manually; follow sure coding standards; apply least privilege principles and secure defaults. Use git pre-commit hooks to block insecure default patterns and prevent direct commits to main.
+
+Category: Lack of Accountability
+Risk: AI cannot be held responsible for the quality or security of the code it generates.
+Impact: Insecure or poor-quality code may be introduced without a clear owner or responsible individual.
+Mitigation: Ensure all code is committed by named individuals only. Developers are fully accountable for all code they commit, regardless of its origin.
