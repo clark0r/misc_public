@@ -1,0 +1,40 @@
+DeviceInfo
+| where DeviceType in ("Server","Workstation")
+| distinct DeviceName, DeviceType
+| summarize count() by DeviceType
+
+let devicesxx=DeviceInfo
+| where DeviceType == "Workstation"
+| distinct DeviceName;
+ExposureGraphNodes 
+| where NodeLabel == "Cve"
+| extend CVSSScore = tostring(NodeProperties.rawData.cvssScore)
+| extend Severity = tostring(NodeProperties.rawData.severity)
+| extend HasExploit = tostring(NodeProperties.rawData.hasExploit)
+| extend ExploitabilityLevel = tostring(NodeProperties.rawData.exploitabilityLevel)
+| where Severity == "Critical"
+// | where ExploitabilityLevel == "ExploitIsVerified" and Severity == "Critical"
+| join ExposureGraphEdges on $left.NodeId == $right.SourceNodeId
+| where TargetNodeLabel == "device"
+| project TargetNodeName, TargetNodeLabel, SourceNodeName, CVSSScore, NodeProperties
+| where TargetNodeName in (devicesxx)
+| distinct TargetNodeName
+
+
+let devicesxx=DeviceInfo
+| where DeviceType == "Server"
+| distinct DeviceName;
+ExposureGraphNodes 
+| where NodeLabel == "Cve"
+| extend CVSSScore = tostring(NodeProperties.rawData.cvssScore)
+| extend Severity = tostring(NodeProperties.rawData.severity)
+| extend HasExploit = tostring(NodeProperties.rawData.hasExploit)
+| extend ExploitabilityLevel = tostring(NodeProperties.rawData.exploitabilityLevel)
+| where Severity == "Critical"
+// | where ExploitabilityLevel == "ExploitIsVerified" and Severity == "Critical"
+| join ExposureGraphEdges on $left.NodeId == $right.SourceNodeId
+| where TargetNodeLabel == "device"
+| project TargetNodeName, TargetNodeLabel, SourceNodeName, CVSSScore, NodeProperties
+| where TargetNodeName in (devicesxx)
+//| summarize count_distinct(TargetNodeName)
+| distinct TargetNodeName
