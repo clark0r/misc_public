@@ -1,0 +1,42 @@
+Security Awareness for Developers
+Focus: Responsible AI Use & Secure Development Practices
+
+Module 1: Introduction to Secure Development
+  - - Understand developers' role in application security
+  - - Overview of Secure SDLC, OWASP Top 10, and DevSecOps
+  - - Importance of accountability and traceability
+
+Module 2: AI-Assisted Development – What Is It?
+  - - Overview of GitHub Copilot and similar tools
+  - - Use cases and efficiency tradeoffs
+  - - How code suggestions are generated
+
+Module 3: Security Risks of Using GitHub Copilot
+  - - Vulnerable code patterns and hardcoded secrets
+  - - Legal/IP concerns from training data
+  - - Context-free suggestions and risk of shadow code
+  - - Real-world examples of insecure AI-generated code
+
+Module 4: Best Practices for Using Copilot Securely
+  - - Always review suggestions
+  - - Use SAST/DAST tools to validate
+  - - Avoid AI-generated code for crypto/auth
+  - - Enforce secure commits with pre-commit hooks
+
+Module 5: Policies and Organizational Guardrails
+  - - Validate all AI-generated code
+  - - Use Copilot only in dev environments
+  - - No use in client code or IAM components
+  - - Commits must link to valid work items
+
+Module 6: Real-World Scenarios and Exercises
+  - - Spot vulnerabilities in suggested code
+  - - Compare manual vs AI-generated code
+  - - Pull request review lab
+  - - Interactive secure-or-sketchy quiz
+
+Module 7: Summary and Commitment
+  - - AI is a tool, not a security control
+  - - Developer is accountable for all code committed
+  - - Take the Developer Security Pledge
+
